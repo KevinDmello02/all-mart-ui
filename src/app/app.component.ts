@@ -31,7 +31,15 @@ export class AppComponent implements OnInit {
       console.log(res);
     });
 
-    this.http.get('https://www.bigbasket.com/custompage/getsearchdata/?slug=sugar&type=deck').subscribe((res: any) => {
+    let bigBazzarBody = {
+      "filters": [],
+      "pageNo": "1",
+      "perPage": "16",
+      "searchTerm": "sugar",
+      "storeCode": "5538"
+   }
+
+    this.http.post('https://express.shop.bigbazaar.com/express/product/search/lite', bigBazzarBody).subscribe((res: any) => {
       console.log(res);
     })
 
