@@ -1,0 +1,41 @@
+@import '../../../styles.scss';
+
+.search-outer-container {
+  height: 100vh;
+  display: flex;
+  .search-container {
+    margin: auto;
+    max-width: 724px;
+    flex: 0 0 100%;
+    .card-container {
+      width: 100%;
+      .search-bar {
+        display: flex;
+        align-items: center;
+        .mat-form-field {
+          width: 90%;
+        }
+        ::ng-deep .mat-form-field-wrapper {
+          padding: 0;
+        }
+        #search-button {
+          // margin-left: 2%;
+          width: 10%;
+          padding: 1%;
+          background-color: $dark-violet;
+          color: $white;
+
+        }
+      }
+      h4 {
+        margin: 1% 0% 0.5% 0.5%;
+        font-weight: 500;
+      }
+      .mart-buttons {
+        button {
+          margin: 0.5%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="search-outer-container">
+  <div class="search-container">
+    <mat-card>
+      <div class="card-container">
+        <!-- <img id="img-cart" src="assets/shopping-cart.png" /> -->
+        <div class="search-bar">
+          <mat-form-field appearance="outline">
+            <mat-label>Search product</mat-label>
+            <input matInput [(ngModel)]="searchKey" placeholder="product">
+            <!-- <mat-icon matSuffix>search</mat-icon> -->
+          </mat-form-field>
+          <button id="search-button" mat-raised-button (click)="searchProducts()" matTooltip="Search product"><mat-icon matSuffix>search</mat-icon></button>
+        </div>
+        <h4>Search in:</h4>
+        <div class="mart-buttons">
+
+          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Dmart">Dmart</button>
+          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Jio mart">Jio Mart</button>
+          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Big Bazzar">Big Bazzar</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

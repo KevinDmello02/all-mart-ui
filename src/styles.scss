@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$snow-white: #fbfef9;
+$black: #080C08;
+$white: #ffffff;
+$green: #71b340;
+$slate-grey: #7392b7;
+$cal-blue: #999fad;
+$dark-violet: #6600eb;
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Poppins"!important;
+  background-color: $white;
+  background-image: url('assets/all-mart-bg-1.png');
+}
