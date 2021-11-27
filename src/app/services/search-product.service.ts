@@ -22,7 +22,6 @@ export class SearchProductService {
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*');
     return this.http.post(this.apiUrl + 'dmartProducts/getProductDetails', payload, { 'headers': headers }).pipe(
-      tap(data => console.log(data)),
       catchError(this.handleError)
     );
   }

@@ -1,12 +1,14 @@
 @import '../../../styles.scss';
 
 .search-outer-container {
-  height: 100vh;
   display: flex;
+  flex-direction: column;
   .search-container {
     margin: auto;
     max-width: 724px;
     flex: 0 0 100%;
+    width: 100%;
+    margin-top: 25%;
     .card-container {
       width: 100%;
       .search-bar {
@@ -34,6 +36,22 @@
       .mart-buttons {
         button {
           margin: 0.5%;
+        }
+      }
+    }
+  }
+  .products-outer-container {
+    padding: 2%;
+    .products-inner-container {
+      display: flex;
+      background: white;
+      border: 2px solid $dark-violet;
+      border-radius: 8px;
+      overflow-x: scroll;
+      .mat-card {
+        margin: 1.5%;
+        .product-container {
+          width: 250px;
         }
       }
     }

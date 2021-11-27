@@ -1,5 +1,5 @@
 <div class="search-outer-container">
-  <div class="search-container">
+  <div class="search-container" [ngStyle]="{ 'margin-top': dmartProductList ? '2%' : '25%' }">
     <mat-card>
       <div class="card-container">
         <!-- <img id="img-cart" src="assets/shopping-cart.png" /> -->
@@ -13,12 +13,37 @@
         </div>
         <h4>Search in:</h4>
         <div class="mart-buttons">
+          <ng-container *ngFor="let storeDetails of stores">
+            <button mat-stroked-button [matTooltip]="storeDetails.tooltip"
+              [ngStyle]="{'background-color':storeDetails.selected === true ? '#6600eb' : 'transparent', 'color': storeDetails.selected === true ? 'white' : 'black'}"
+              (click)="selectStore(storeDetails.name)">
+              {{storeDetails.name}}
+            </button>
+          </ng-container>
 
-          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Dmart">Dmart</button>
-          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Jio mart">Jio Mart</button>
-          <button mat-stroked-button (click)="searchProducts()" matTooltip="Search in Big Bazzar">Big Bazzar</button>
+          <!-- <button mat-stroked-button matTooltip="Search in Dmart">Dmart</button>
+          <button mat-stroked-button matTooltip="Search in Jio mart">Jio Mart</button>
+          <button mat-stroked-button matTooltip="Search in Big Bazzar">Big Bazzar</button> -->
         </div>
       </div>
     </mat-card>
+  </div>
+  <div class="products-outer-container" *ngIf="dmartProductList">
+    <div class="products-inner-container">
+      <ng-container *ngFor="let dmartData of dmartProductList">
+        <ng-container *ngFor="let skuData of dmartData.skus">
+        <mat-card>
+          <div class="product-container">
+
+              <img src="{{dmartImgURL + skuData.imagekey + '_' + skuData.imgcode + '_B.jpg'}}" height="100px" width="100px" />
+              <h3>{{skuData.name}}</h3>
+              <h5><s>{{skuData.price_MRP}}</s></h5>
+              <h5>{{skuData.price_SALE}}</h5>
+
+          </div>
+        </mat-card>
+      </ng-container>
+      </ng-container>
+    </div>
   </div>
 </div>
