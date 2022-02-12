@@ -1,5 +1,7 @@
+@import '../../../styles.scss';
+
 .outer-container {
-  background: #6600eb;
+  background: $black;
   color: white;
   height: 30px;
   display: flex;
@@ -23,6 +25,17 @@
       top: 4%;
       p {
         margin: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+  .outer-container {
+    height: 50px;
+    .inner-container {
+      h1 {
+        font-size: 230%;
       }
     }
   }

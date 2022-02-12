@@ -1,6 +1,6 @@
 <app-loading-page [searchMart]="searchStore" [searchProduct]="searchKey" *ngIf="DLoading || JLoading || BLoading"></app-loading-page>
 <div class="search-outer-container" *ngIf="!DLoading || !JLoading || !BLoading">
-  <div class="search-container" [ngStyle]="{ 'margin-top': dmartProductList || jioMartProductList || bigBazzarProductList ? '2%' : '25%' }">
+  <div class="search-container" [ngStyle]="{ 'margin-top': dmartProductList || jioMartProductList || bigBazzarProductList ? '2%' : margin }">
     <mat-card>
       <div class="card-container">
         <!-- <img id="img-cart" src="assets/shopping-cart.png" /> -->
@@ -16,7 +16,7 @@
         <div class="mart-buttons">
           <ng-container *ngFor="let storeDetails of stores">
             <button mat-stroked-button [matTooltip]="storeDetails.tooltip"
-              [ngStyle]="{'background-color':storeDetails.selected === true ? '#6600eb' : 'transparent', 'color': storeDetails.selected === true ? 'white' : 'black'}"
+              [ngStyle]="{'background-color':storeDetails.selected === true ? '#080C08' : 'transparent', 'color': storeDetails.selected === true ? 'white' : 'black'}"
               (click)="selectStore(storeDetails.name)">
               {{storeDetails.name}}
             </button>

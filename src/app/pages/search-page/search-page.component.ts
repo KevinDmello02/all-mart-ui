@@ -136,6 +136,8 @@ export class SearchPageComponent implements OnInit {
   BLoading = false;
   searchStore: string;
 
+  margin = '15%'
+
   constructor(
     private _snackBar: MatSnackBar,
     private searchProductService: SearchProductService,
@@ -143,10 +145,18 @@ export class SearchPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (window.innerWidth > 500) {
+      this.margin = '15%';
+    } else {
+      this.margin = '55%';
+    }
   }
 
   searchProducts() {
     this.searchStore = "";
+    // this.BLoading = true;
+    // this.DLoading = true;
+    // this.JLoading = true;
     this.stores.forEach((element, index) => {
       console.log(index, this.searchStore.length);
       if (element.selected && this.searchStore.length == 0) {

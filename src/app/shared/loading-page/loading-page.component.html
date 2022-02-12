@@ -3,7 +3,7 @@
     <img src="/assets/loading-1.gif" />
   </div>
   <div class="search-contents">
-    <h2>Hang on while we are searching {{searchProduct}} in {{searchMart}}</h2>
+    <h2>Hang on while we are searching for <b>{{searchProduct | titlecase}}</b>  in <b>{{searchMart}}</b> </h2>
   </div>
   <div class="random-quote" *ngIf="randomQuote">
     <h4>{{randomQuote}}</h4>
