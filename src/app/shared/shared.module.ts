@@ -13,7 +13,8 @@ import { LoadingPageComponent } from './loading-page/loading-page.component';
     CommonModule
   ],
   exports: [
-    NavigationComponent
+    NavigationComponent,
+    LoadingPageComponent
   ]
 })
 export class SharedModule { }

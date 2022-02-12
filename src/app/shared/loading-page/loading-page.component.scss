@@ -1,0 +1,14 @@
+.outer-container {
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .gif-container {
+    img {
+      display: block;
+      margin: auto;
+      width: 70%;
+    }
+  }
+}

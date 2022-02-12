@@ -1,5 +1,6 @@
-<div class="search-outer-container">
-  <div class="search-container" [ngStyle]="{ 'margin-top': dmartProductList ? '2%' : '25%' }">
+<app-loading-page [searchMart]="searchStore" [searchProduct]="searchKey" *ngIf="DLoading || JLoading || BLoading"></app-loading-page>
+<div class="search-outer-container" *ngIf="!DLoading || !JLoading || !BLoading">
+  <div class="search-container" [ngStyle]="{ 'margin-top': dmartProductList || jioMartProductList || bigBazzarProductList ? '2%' : '25%' }">
     <mat-card>
       <div class="card-container">
         <!-- <img id="img-cart" src="assets/shopping-cart.png" /> -->
@@ -28,21 +29,79 @@
       </div>
     </mat-card>
   </div>
-  <div class="products-outer-container" *ngIf="dmartProductList">
+  <div class="products-outer-container" id="dmart" *ngIf="dmartProductList">
+    <div class="mart-logo-container">
+      <img src="assets/dmart-logo.png" alt="dmart-logo" />
+    </div>
     <div class="products-inner-container">
       <ng-container *ngFor="let dmartData of dmartProductList">
         <ng-container *ngFor="let skuData of dmartData.skus">
-        <mat-card>
+          <mat-card style="border: 1px solid #1b6f38">
+            <div class="product-container">
+              <div class="product-header">
+                <img src="{{dmartImgURL + skuData.imagekey + '_' + skuData.imgcode + '_B.jpg'}}" alt="{{skuData.name}}" />
+              </div>
+              <div class="product-body">
+                <h3>{{skuData.name}}</h3>
+              </div>
+              <div class="product-footer">
+                <h5 id="mrp">MRP: <s>{{skuData.price_MRP}}</s></h5>
+                <h5 id="offer">DMart Price: <b style="color: #1b6f38;">{{skuData.price_SALE}}</b></h5>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="products-outer-container" id="jiomart" *ngIf="jioMartProductList">
+    <div class="mart-logo-container">
+      <img src="assets/jiomart-logo.png" alt="jiomart-logo" />
+    </div>
+    <div class="products-inner-container">
+      <ng-container *ngFor="let jioMartData of jioMartProductList">
+        <!-- <ng-container *ngFor="let skuData of dmartData.skus">
+
+        </ng-container> -->
+        <mat-card style="border: 1px solid #0c93ce;">
           <div class="product-container">
-
-              <img src="{{dmartImgURL + skuData.imagekey + '_' + skuData.imgcode + '_B.jpg'}}" height="100px" width="100px" />
-              <h3>{{skuData.name}}</h3>
-              <h5><s>{{skuData.price_MRP}}</s></h5>
-              <h5>{{skuData.price_SALE}}</h5>
-
+            <div class="product-header">
+              <img src="{{jiomartImgURL + jioMartData.image_url}}" alt="{{jioMartData.display_name}}" />
+            </div>
+            <div class="product-body">
+              <h3>{{jioMartData.display_name}}</h3>
+            </div>
+            <div class="product-footer">
+              <h5 id="mrp">MRP: <s>{{jioMartData.avg_mrp}}</s></h5>
+              <h5 id="offer">Jio Mart Price: <b style="color: #0c93ce;">{{jioMartData.avg_selling_price}}</b></h5>
+            </div>
           </div>
         </mat-card>
       </ng-container>
+    </div>
+  </div>
+  <div class="products-outer-container" id="bigbazzar" *ngIf="bigBazzarProductList">
+    <div class="mart-logo-container">
+      <img src="assets/bigbazzar-logo.png" alt="dmart-logo" />
+    </div>
+    <div class="products-inner-container">
+      <ng-container *ngFor="let bigBazzarData of bigBazzarProductList">
+        <ng-container *ngFor="let skuData of bigBazzarData.skus">
+          <mat-card style="border: 1px solid #fe4102">
+            <div class="product-container">
+              <div class="product-header">
+                <img [src]="sanitizeUrl(bigbazzarImgURL + bigBazzarData.image[0].url)" alt="{{bigBazzarData.product_name}}" />
+              </div>
+              <div class="product-body">
+                <h3>{{bigBazzarData.product_name}}</h3>
+              </div>
+              <div class="product-footer">
+                <h5 id="mrp">MRP: <s>{{skuData.price}}</s></h5>
+                <h5 id="offer">Big Bazzar Price: <b style="color: #fe4102;">{{skuData.memberPrice}}</b></h5>
+              </div>
+            </div>
+          </mat-card>
+        </ng-container>
       </ng-container>
     </div>
   </div>

@@ -41,19 +41,112 @@
     }
   }
   .products-outer-container {
-    padding: 2%;
+    margin: 2%;
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 3px 5px 11px -1px rgb(0 0 0 / 75%);
+    flex-direction: column;
+    padding: 1%;
+    .mart-logo-container {
+      img {
+        width: 8%;
+      }
+    }
     .products-inner-container {
       display: flex;
-      background: white;
-      border: 2px solid $dark-violet;
-      border-radius: 8px;
       overflow-x: scroll;
       .mat-card {
         margin: 1.5%;
         .product-container {
           width: 250px;
+          display: flex;
+          height: 100%;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .product-header {
+            img {
+              display: block;
+              margin: auto;
+              width: 60%;
+              height: 150px;
+            }
+          }
+          .product-body {
+            h3 {
+              font-weight: 500;
+              font-size: 130%;
+            }
+          }
+          .product-footer {
+            display: flex;
+            flex-wrap: wrap;
+            #mrp {
+              font-weight: 500;
+              font-size: 130%;
+              color: $cal-blue;
+            }
+            #offer {
+              font-weight: 600;
+              font-size: 150%;
+              b {
+                color: rgb(52, 157, 52);
+              }
+            }
+          }
+
         }
       }
+
+    }
+
+  }
+  #dmart {
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: $dmart;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: $dmart-dark;
     }
   }
+  #jiomart {
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: $jiomart;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: $jiomart-dark;
+    }
+  }
+  #bigbazzar {
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: $bigbazzar;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: $bigbazzar-dark;
+    }
+  }
+  ::-webkit-scrollbar {
+    height: 5px;
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px $cal-blue;
+    border-radius: 10px;
+  }
 }
+

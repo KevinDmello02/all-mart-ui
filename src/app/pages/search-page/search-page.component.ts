@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 import { SearchProductService } from 'src/app/services/search-product.service';
 
@@ -13,6 +15,8 @@ export class SearchPageComponent implements OnInit {
   searchKey = '';
 
   dmartProductList: any;
+  jioMartProductList: any;
+  bigBazzarProductList: any;
 //   dmartProductList: any = [{
 //     "buyable": "true",
 //     "manufacturer": "Premia",
@@ -102,6 +106,9 @@ export class SearchPageComponent implements OnInit {
 //     "templatetype": "Grocery"
 // }];
   dmartImgURL = 'https://img.dmart.in/images/rwd/products/';
+  jiomartImgURL = 'https://www.jiomart.com/';
+  bigbazzarImgURL = ' https://cflare.shop.bigbazaar.com/cdn-cgi/image/width=450/';
+  // https://cflare.shop.bigbazaar.com/cdn-cgi/image/width=450/media/simple/80/0901/1_2-zoom.jpg
 
   stores = [
     {
@@ -124,36 +131,86 @@ export class SearchPageComponent implements OnInit {
   selectedValue: any;
 
   indexData = 0;
+  DLoading = false;
+  JLoading = false;
+  BLoading = false;
+  searchStore: string;
 
   constructor(
     private _snackBar: MatSnackBar,
-    private searchProductService: SearchProductService
+    private searchProductService: SearchProductService,
+    private _sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
   }
 
   searchProducts() {
+    this.searchStore = "";
+    this.stores.forEach((element, index) => {
+      console.log(index, this.searchStore.length);
+      if (element.selected && this.searchStore.length == 0) {
+        this.searchStore = this.searchStore + element.name;
+      } else if (element.selected && this.searchStore.length != 0) {
+        this.searchStore = this.searchStore + ', ' + element.name;
+      }
+    })
     if (this.searchKey.length != 0) {
       console.log(this.searchKey);
       let payload = {
         searchKey: this.searchKey
       }
 
-      this.searchProductService.getProductDetailsForDmart(payload).subscribe((res: any) => {
-        // console.log(res);
-        if (res.suggestionView) {
-          this.dmartProductList = res.suggestionView;
-          console.log(this.dmartProductList);
-        }
-      })
+      if (this.stores[0].selected) {
+        this.DLoading = true;
+        this.searchProductService.getProductDetailsForDmart(payload).subscribe((res: any) => {
+          // console.log(res);
+          this.DLoading = false;
+          if (res.suggestionView) {
+            this.dmartProductList = res.suggestionView;
+            console.log(this.dmartProductList);
+          }
+        })
+      } else {
+        this.DLoading = false;
+      }
+
+      if (this.stores[1].selected) {
+        this.JLoading = true;
+        this.searchProductService.getProductDetailsForJioMart(payload).subscribe((res: any) => {
+          console.log(res);
+          this.JLoading = false;
+          if (res.results[0].hits) {
+            this.jioMartProductList = res.results[0].hits;
+          }
+          // if (res.suggestionView) {
+          //   this.dmartProductList = res.suggestionView;
+          //   console.log(this.dmartProductList);
+          // }
+        })
+      } else {
+        this.JLoading = false;
+      }
+
+      if (this.stores[2].selected) {
+        this.BLoading = true;
+        this.searchProductService.getProductDetailsForBigBazzar(payload).subscribe((res: any) => {
+          console.log(res);
+          this.BLoading = false;
+          if (res) {
+            this.bigBazzarProductList = res;
+            console.log(this.bigBazzarProductList);
+          }
+        })
+      } else {
+        this.BLoading = false;
+      }
 
     } else {
       this._snackBar.open('Please enter a product!', 'Dismiss', {
         duration: 3000
       });
     }
-
   }
 
   selectStore(storeName) {
@@ -173,6 +230,10 @@ export class SearchPageComponent implements OnInit {
       })
     })
     this.indexData = count - 1;
+  }
+
+  sanitizeUrl(url): SafeUrl {
+    return this._sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }

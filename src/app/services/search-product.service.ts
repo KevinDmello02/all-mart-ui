@@ -26,6 +26,24 @@ export class SearchProductService {
     );
   }
 
+  getProductDetailsForBigBazzar(payload):Observable<any> {
+    const headers= new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.http.post(this.apiUrl + 'bigbazzarProducts/getProductDetails', payload, { 'headers': headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProductDetailsForJioMart(payload):Observable<any> {
+    const headers= new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.http.post(this.apiUrl + 'jiomartProducts/getProductDetails', payload, { 'headers': headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(err: HttpErrorResponse) {
     let errorMessage = `An error occurred in getProductDetails: ${err.error.message}`
     console.log(`An error occurred in getProductDetails: ${err.error.message}`)
