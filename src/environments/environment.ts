@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://all-mart-server.herokuapp.com/api/'
+  apiURL: 'https://all-mart-server.herokuapp.com/api/'
 };
 
 /*
